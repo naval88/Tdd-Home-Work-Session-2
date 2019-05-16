@@ -23,4 +23,10 @@ class RawQueryTest extends TestCase
     {
         $this->assertEquals('select id, name from products', (new RawQuery)->select('products',['id', 'name']));
     }
+
+    public function testOrderByColumns()
+    {
+        $this->assertEquals('select id, name from products order by id desc', (new RawQuery)->select('products',['id', 'name'], ['id', 'desc']));
+    }
+
 }
