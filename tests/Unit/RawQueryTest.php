@@ -18,4 +18,9 @@ class RawQueryTest extends TestCase
     {
         $this->assertEquals('select * from products', (new RawQuery)->select('products'));
     }
+
+    public function testSpecificColumns()
+    {
+        $this->assertEquals('select id, name from products', (new RawQuery)->select('products',['id', 'name']));
+    }
 }
