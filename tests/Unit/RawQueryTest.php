@@ -41,9 +41,15 @@ class RawQueryTest extends TestCase
 
     public function testAllColoumsOrderByMulitpleColumns()
     {
-		$this->assertEquals('SELECT id, name FROM products ORDER BY id DESC', (new RawQuery)->select('products',
-		['column'=>['id', 'name'],
-		'orderbycap'=>['id', 'DESC']]));
+    	$this->assertEquals('SELECT id, name FROM products ORDER BY id DESC', (new RawQuery)->select('products',
+        	['column'=>['id', 'name'],
+        	'orderbycap'=>['id', 'DESC']]));
+	}
+
+	public function testlimit()
+    {
+    	$this->assertEquals('select * from products limit 10', (new RawQuery)->select('products',
+        	['limit'=>10]));
 	}
 
 
