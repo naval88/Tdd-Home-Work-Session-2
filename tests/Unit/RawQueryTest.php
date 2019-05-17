@@ -57,4 +57,10 @@ class RawQueryTest extends TestCase
         $this->assertEquals('select * from products limit 6 offset 5', (new RawQuery)->select('products',
             ['limitandoffset'=>[6, 5]]));
     }
+
+    public function testCount()
+    {
+        $this->assertEquals('select *, count("id") from products', (new RawQuery)->select('products',
+            ['count'=>'id']));
+    }
 }

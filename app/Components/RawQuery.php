@@ -25,6 +25,11 @@ class RawQuery {
       if (!empty($data['limitandoffset'])) {
           return "select $fields from $table limit ".$data['limitandoffset'][0]." offset ".$data['limitandoffset'][1];
       }
+
+      if (!empty($data['count'])) {
+          return "select $fields, count(".'"'.$data['count'].'"'.") from $table";
+      }
+
       return "select $fields from $table";
     }
 }
