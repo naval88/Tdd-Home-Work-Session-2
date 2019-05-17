@@ -46,11 +46,15 @@ class RawQueryTest extends TestCase
         	'orderbycap'=>['id', 'DESC']]));
 	}
 
-	public function testlimit()
+	public function testLimit()
     {
     	$this->assertEquals('select * from products limit 10', (new RawQuery)->select('products',
         	['limit'=>10]));
 	}
 
-
+    public function testLimitAndOffset()
+    {
+        $this->assertEquals('select * from products limit 6 offset 5', (new RawQuery)->select('products',
+            ['limitandoffset'=>[6, 5]]));
+    }
 }
