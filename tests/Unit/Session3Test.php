@@ -51,4 +51,37 @@ class Session3Test extends TestCase
         $product = factory(Products::class)->create($product_data);     
         $this->assertInstanceOf(Products::class, $product);
     }
+
+	/**
+	* @dataProvider ABProvider
+	*/
+    public function testA($a, $b, $c)
+    {
+       $this->assertEquals($a, $b);
+       return $a;
+    }
+    /**
+     * @dataProvider ABProvider
+     */
+    public function testB($a, $b, $c)
+    {
+       $this->assertEquals($a, $b);
+       return $c;
+    }
+    public function ABProvider() 
+    {
+        return array(
+          array(0, 0, 0),
+          array(3, 3, 6),
+          array(5, 5, 10),
+        );
+    }
+	/**
+	* @depends testA
+	* @depends testB
+	*/
+    public function testC($a,$c) 
+    {
+       $this->assertEquals($c, $a+$a);
+    }
 }
