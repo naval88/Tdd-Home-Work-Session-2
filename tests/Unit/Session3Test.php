@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\User;
 use App\Model\Products;
+use Validator;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -84,4 +85,28 @@ class Session3Test extends TestCase
     {
        $this->assertEquals($c, $a+$a);
     }
+
+    /**
+     * @dataProvider urlProvider
+     */
+    public function testUrl($url) //Q6
+    {
+        $url = [
+            'url'=>$url
+        ];
+        $rule = [
+            'url'=>'required|url'
+        ];
+        $validator = Validator::make($url, $rule);
+        $this->assertEquals('The url format is invalid.', $validator->errors()->first());
+    }
+
+    public function urlProvider()
+    {
+        return array(
+          array('//invalid-url.com'),
+          array('s//example.com')
+        );
+    }
+
 }
