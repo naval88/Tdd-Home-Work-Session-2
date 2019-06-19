@@ -109,4 +109,12 @@ class Session3Test extends TestCase
         );
     }
 
+
+    public function testAssertCount(): void 
+    {
+        $a = [5, 6, 9];
+        
+        $this->assertCount(3, $a);
+    }
+
 }
